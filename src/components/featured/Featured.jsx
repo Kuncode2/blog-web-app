@@ -18,7 +18,7 @@ const Featured = () => {
             Whether you are an aspiring artist, a curious thinker, or simply looking to add a 
             touch of creativity to your routine, our journey together will remind you that creativity known no bounds. Get ready to unlock a world of innovation and self-expression! 
           </p>
-          <button className={styles.button}>Read More</button>
+          
         </div>
       </div>
     </div>

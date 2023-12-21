@@ -15,6 +15,12 @@ const getData = async (slug) => {
   return res.json();
 };
 
+const getCurrentDate = () => {
+  const currentDate = new Date();
+  const formattedDate = `${currentDate.getDate()}.${currentDate.getMonth() + 1}.${currentDate.getFullYear()}`;
+  return formattedDate;
+};
+
 const SinglePage = async ({ params }) => {
   const { slug } = params;
 
@@ -33,7 +39,7 @@ const SinglePage = async ({ params }) => {
             )}
             <div className={styles.userTextContainer}>
               <span className={styles.username}>{data?.user.name}</span>
-              <span className={styles.date}>01.01.2024</span>
+              <span className={styles.date}>{getCurrentDate()}</span>
             </div>
           </div>
         </div>

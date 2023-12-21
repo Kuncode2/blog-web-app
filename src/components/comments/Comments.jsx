@@ -31,11 +31,23 @@ const Comments = ({ postSlug }) => {
   const [desc, setDesc] = useState("");
 
   const handleSubmit = async () => {
+    // Check if the comment is not empty
+    if (!desc.trim()) {
+      // If the comment is empty, display an error message
+      alert("Write some comment");
+      return;
+    }
+
+    // If the comment is not empty, proceed with the POST request
     await fetch("/api/comments", {
       method: "POST",
       body: JSON.stringify({ desc, postSlug }),
     });
+
+    // After posting the comment, refresh the comments
     mutate();
+    // Clear the comment input
+    setDesc("");
   };
 
   return (
@@ -46,6 +58,7 @@ const Comments = ({ postSlug }) => {
           <textarea
             placeholder="write a comment..."
             className={styles.input}
+            value={desc}
             onChange={(e) => setDesc(e.target.value)}
           />
           <button className={styles.button} onClick={handleSubmit}>

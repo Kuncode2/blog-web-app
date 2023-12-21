@@ -78,6 +78,31 @@ const WritePage = () => {
       .replace(/^-+|-+$/g, "");
 
   const handleSubmit = async () => {
+    // Check if title is not empty
+    if (!title.trim()) {
+      alert("Write Title first");
+      return;
+    }
+
+    // Checking the image is present
+    if (!file) {
+      alert("Please select an image");
+      return;
+    }
+
+    // Check if the selected file is an image with the allowed formats
+    const allowedFormats = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    if (!allowedFormats.includes(file.type)) {
+      alert("Please upload a valid image file (jpeg, jpg, png, webp)");
+      return;
+    }
+
+    // Check if the text area is not empty
+    if (!value.trim()) {
+      alert("Write your story");
+      return;
+    }
+    // i'm calling my api
     const res = await fetch("/api/posts", {
       method: "POST",
       body: JSON.stringify({
@@ -85,7 +110,7 @@ const WritePage = () => {
         desc: value,
         img: media,
         slug: slugify(title),
-        catSlug: catSlug || "style", //If not selected, choose the general category
+        catSlug: catSlug || "style",
       }),
     });
 
@@ -127,12 +152,6 @@ const WritePage = () => {
               <label htmlFor="image">
                 <Image src="/image.png" alt="" width={16} height={16} />
               </label>
-            </button>
-            <button className={styles.addButton}>
-              <Image src="/external.png" alt="" width={16} height={16} />
-            </button>
-            <button className={styles.addButton}>
-              <Image src="/video.png" alt="" width={16} height={16} />
             </button>
           </div>
         )}
